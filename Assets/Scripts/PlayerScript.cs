@@ -7,15 +7,19 @@ public class PlayerScript : MonoBehaviour
 
     public Animator anim;
     public float moveSpeed = 1.0f;
+    private Rigidbody rb;
 
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
     }
 
-    void Update()
+    // Debería ser FixedUpdate si se usan fisicas, pero no me permite direccionar al jugador a los costados con el cursor
+    void Update() 
     {
        Move();
     }
+
 
 
     void Move()
@@ -36,8 +40,28 @@ public class PlayerScript : MonoBehaviour
         }
 
         transform.Translate(moveInput * moveSpeed * Time.deltaTime);
-
-        
-        //rb.AddForce(moveInput * moveSpeed * Time.deltaTime);
+        //rb.MovePosition(transform.position + moveInput * moveSpeed * Time.fixedDeltaTime);
     }
+
+    void OnCollisionEnter(Collision col) 
+    {
+        Debug.Log("Collision with " + col.gameObject.name);
+        switch(col.gameObject.tag)
+        {
+        case "Hint":
+            Debug.Log("This is a Hint");
+            HintScript script = col.gameObject.GetComponent<HintScript>();
+            script.TurnOffLight();
+            break;
+        case "Whistler":
+            Debug.Log("End game: You loose");
+            break;
+        case "Exit":
+            Debug.Log("End game: You win");
+            break;
+        }
+
+    }
+    
+
 }
