@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
     public void FindHint()
     {
         hintsToFind -= 1;
-        Debug.Log(hintsToFind);
+        Debug.Log("Hints to find: " + hintsToFind);
     }
 
 

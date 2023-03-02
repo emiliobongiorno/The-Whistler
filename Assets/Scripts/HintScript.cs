@@ -5,6 +5,7 @@ using UnityEngine;
 public class HintScript : MonoBehaviour
 {
     public Light spotLight;
+    public GameObject paperHint;
 
     void Start()
     {
@@ -19,6 +20,11 @@ public class HintScript : MonoBehaviour
     public void TurnOffLight() 
     {
         spotLight.intensity = 0.0f;
+    }
+
+    public void DestroyPaper() 
+    {
+        Destroy(paperHint);
     }
 /*
     void OnCollisionEnter(Collision col) 

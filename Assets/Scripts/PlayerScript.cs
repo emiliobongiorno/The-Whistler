@@ -64,10 +64,13 @@ public class PlayerScript : MonoBehaviour
         {
         case "Hint":
             Debug.Log("This is a Hint");
-            /*HintScript script = col.gameObject.GetComponent<HintScript>();
-            script.TurnOffLight();*/
+            
             GameManager.instance.FindHint();
-            Destroy(col.gameObject);
+
+            HintScript script = col.gameObject.GetComponent<HintScript>();
+            script.TurnOffLight();
+            script.DestroyPaper();
+            //Destroy(col.gameObject);
             break;
         case "Whistler":
             Debug.Log("End game: You loose");
