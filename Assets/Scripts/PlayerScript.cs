@@ -11,6 +11,9 @@ public class PlayerScript : MonoBehaviour
     private float speed = 2.0f;
     private Rigidbody rb;
 
+    public float range = 100f;
+    public Camera fpsCam;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -20,6 +23,19 @@ public class PlayerScript : MonoBehaviour
     void Update() 
     {
        Move();
+       
+    }
+
+    void OnMouseDown()
+    {
+       RaycastHit hit;
+       if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range)) {
+            if (hit.transform.tag == "Hint") {
+                Debug.Log("This is a hint");
+            } else {
+                Debug.Log("This is " + hit.transform.tag);
+            }
+       }
     }
 
 
