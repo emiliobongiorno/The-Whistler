@@ -14,6 +14,13 @@ public class PlayerScript : MonoBehaviour
     public float range = 100f;
     public Camera fpsCam;
 
+    //Player Look Rotation
+    public float mouseSensibility = 1000f;
+
+    public float xRotacion = 0;
+
+    public float yRotacion = 0;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -23,12 +30,18 @@ public class PlayerScript : MonoBehaviour
     void Update() 
     {
        Move();
-       
+       MouseLook();
+       if (Input.GetMouseButtonDown(0)) 
+       {
+            PickUpThings();
+       }
+
     }
 
-    void OnMouseDown()
+    void PickUpThings()
     {
        RaycastHit hit;
+       Debug.Log("Mouse down");
        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range)) {
             if (hit.transform.tag == "Hint") {
                 Debug.Log("This is a hint");
@@ -65,7 +78,7 @@ public class PlayerScript : MonoBehaviour
                 anim.SetBool("isWalking", true);
                 anim.SetBool("isRunning", false);
             }
-            transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * 10, 0);
+            transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * mouseSensibility, 0);
             //transform.rotation = Quaternion.LookRotation(moveInput);
         }
 
@@ -79,13 +92,14 @@ public class PlayerScript : MonoBehaviour
         switch(col.gameObject.tag)
         {
         case "Hint":
-            Debug.Log("This is a Hint");
+            
             
             GameManager.instance.FindHint();
 
             HintScript script = col.gameObject.GetComponent<HintScript>();
             script.TurnOffLight();
             script.DestroyPaper();
+            Debug.Log("Hint picked up");
             //Destroy(col.gameObject);
             break;
         case "Whistler":
@@ -95,6 +109,26 @@ public class PlayerScript : MonoBehaviour
             Debug.Log("End game: You win");
             break;
         }
+
+    }
+
+    void MouseLook()
+
+    {
+
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensibility * Time.deltaTime;
+
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensibility * Time.deltaTime;
+
+        xRotacion -= mouseY;
+
+        xRotacion = Mathf.Clamp(xRotacion, -70,70);
+
+        yRotacion += mouseX;//esto es asi sino funciona al revez
+
+        //yRotacion = Mathf.Clamp(yRotacion,-360,360);
+
+        transform.localRotation= Quaternion.Euler(xRotacion,yRotacion,0);
 
     }
     

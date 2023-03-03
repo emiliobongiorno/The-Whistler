@@ -292,6 +292,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PaperHint
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: bbc52e9f4f0e54547bf3ce9e2dde9c53, type: 3}
+      propertyPath: m_TagString
+      value: Hint
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbc52e9f4f0e54547bf3ce9e2dde9c53, type: 3}
 --- !u!4 &4021601460727128674 stripped
