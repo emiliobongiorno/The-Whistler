@@ -38,6 +38,11 @@ public class GameManager : MonoBehaviour
         Debug.Log("Hints to find: " + hintsToFind);
     }
 
+    public bool AreHintsPickedUp()
+    {
+        return hintsToFind == 0;
+    }
+
 
     private Vector3 Random(Vector3 min, Vector3 max)
      {

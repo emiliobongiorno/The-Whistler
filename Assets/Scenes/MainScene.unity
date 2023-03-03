@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.012840796, g: 0.013210962, b: 0.01406073, a: 1}
+  m_IndirectSpecularColor: {r: 0.012341896, g: 0.012724813, b: 0.0136008235, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -145,9 +145,6 @@ MonoBehaviour:
   runSpeed: 4
   range: 100
   fpsCam: {fileID: 963194227}
-  sensibilidadMouse: 100
-  xRotacion: 0
-  yRotacion: 0
 --- !u!65 &42032152
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1434,6 +1431,7 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
+  - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1500,13 +1498,28 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.0165859, y: 0.00000003289525, z: -5.4567234e-10, w: 0.9998625}
-  m_LocalPosition: {x: 0, y: 2, z: -3}
+  m_LocalPosition: {x: 0, y: 1.88, z: 1.15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 42032155}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &963194229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae83cf40cd05d448d875820134eaa4ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseSensibility: 1000
+  xRotacion: 0
+  yRotacion: 0
 --- !u!1 &1276889303
 GameObject:
   m_ObjectHideFlags: 0
@@ -1622,7 +1635,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &1350596469
 Light:
   m_ObjectHideFlags: 0
@@ -1693,7 +1706,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1350596468}
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: -2.463037, y: 10.62, z: -0.16159773}
+  m_LocalPosition: {x: -1.91, y: 10.62, z: 0.16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1850,8 +1863,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 2.4, z: 1}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &1732959661
 GameObject:
   m_ObjectHideFlags: 0
