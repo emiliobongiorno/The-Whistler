@@ -5,12 +5,12 @@ using UnityEngine;
 public class PlayerScript : MonoBehaviour
 {
 
-    public Animator anim;
+   /* public Animator anim;
     public float walkSpeed = 2.0f;
     public float runSpeed = 4.0f;
     private float speed = 2.0f;
     private Rigidbody rb;
-
+*/
     public float range = 100f;
     public Camera fpsCam;
 
@@ -18,13 +18,13 @@ public class PlayerScript : MonoBehaviour
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        //rb = GetComponent<Rigidbody>();
     }
 
     // Debería ser FixedUpdate si se usan fisicas, pero no me permite direccionar al jugador a los costados con el cursor
     void Update() 
     {
-       Move();
+      // Move();
        if (Input.GetMouseButtonDown(0)) 
        {
             PickUpThings();
@@ -52,7 +52,7 @@ public class PlayerScript : MonoBehaviour
     }
 
 
-
+/*
     void Move()
     {
         float horizontal = Input.GetAxis("Horizontal");
@@ -82,9 +82,9 @@ public class PlayerScript : MonoBehaviour
             //transform.rotation = Quaternion.LookRotation(moveInput);
         }
 
-        transform.Translate(moveInput * speed * Time.deltaTime);
+//        transform.Translate(moveInput * speed * Time.deltaTime);
         //rb.MovePosition(transform.position + moveInput * speed * Time.fixedDeltaTime);
-    }
+    }*/
 
     void OnCollisionEnter(Collision col) 
     {
