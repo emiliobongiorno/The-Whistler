@@ -395,8 +395,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fbc1050bce7f4413980bf94da372228, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensX: 1000
-  sensY: 1000
+  sensX: 400
+  sensY: 400
   orientation: {fileID: 1303215830}
 --- !u!1 &1276889303
 GameObject:
@@ -1085,6 +1085,10 @@ PrefabInstance:
       propertyPath: canv
       value: 
       objectReference: {fileID: 1798387073}
+    - target: {fileID: 5759392225488266728, guid: ed721f45929724ca9bceff52b51f9cf9, type: 3}
+      propertyPath: range
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 5759392225488266728, guid: ed721f45929724ca9bceff52b51f9cf9, type: 3}
       propertyPath: fpsCam
       value: 
