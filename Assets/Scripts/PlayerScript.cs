@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -12,43 +13,51 @@ public class PlayerScript : MonoBehaviour
     private Rigidbody rb;
 */
     public float range = 100f;
-    public Camera fpsCam;
+    public Camera cam;
+
+    public TextMeshProUGUI grabHintText;
 
 
 
     void Start()
     {
         //rb = GetComponent<Rigidbody>();
+        grabHintText.enabled = false; 
     }
 
     // Debería ser FixedUpdate si se usan fisicas, pero no me permite direccionar al jugador a los costados con el cursor
     void Update() 
     {
       // Move();
-       if (Input.GetMouseButtonDown(0)) 
-       {
-            PickUpThings();
-       }
+       PerformRaycast();
 
     }
 
-    void PickUpThings()
+    void PerformRaycast()
     {
-       RaycastHit hit;
-       Debug.Log("Mouse down");
-       Ray ray = fpsCam.ScreenPointToRay(Input.mousePosition);
-
+       RaycastHit hit;        
+       Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
        if (Physics.Raycast(ray , out hit, range)) {
             if (hit.transform.tag == "Hint") {
-                GameManager.instance.FindHint();
-                HintScript script = hit.transform.gameObject.GetComponent<HintScript>();
-                script.TurnOffLight();
-                script.DestroyPaper();
-                Debug.Log("Hint picked up");
-            } else {
-                Debug.Log("This is " + hit.transform.name);
+                if (Input.GetKeyDown(KeyCode.E)) 
+                {
+                    PickUpHint(hit);
+                }
+                grabHintText.enabled = true; 
+            }
+            else {
+                grabHintText.enabled = false; 
             }
        }
+    }
+
+    void PickUpHint(RaycastHit hit)
+    {
+        GameManager.instance.FindHint();
+        HintScript script = hit.transform.gameObject.GetComponent<HintScript>();
+        script.TurnOffLight();
+        script.DestroyPaper();
+        Debug.Log("Hint picked up");
     }
 
 
