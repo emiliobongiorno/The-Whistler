@@ -26,8 +26,12 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         for (int i = 0; i < hintsToFind; i++) {
-            Vector3 hintPosition = Random(new Vector3(-10,0,-10), new Vector3(10,0,10));
-            hints.Add(Instantiate(hintPrefab, hintPosition, Quaternion.identity));
+            Vector3 hintPosition = Random(new Vector3(490,0,490), new Vector3(510,0,510));
+            
+            GameObject hint = Instantiate(hintPrefab, hintPosition, Quaternion.identity);
+            hintPosition.y = Terrain.activeTerrain.SampleHeight(hint.transform.position);
+            hint.transform.position = hintPosition;
+            hints.Add(hint);
         }
         
     }
