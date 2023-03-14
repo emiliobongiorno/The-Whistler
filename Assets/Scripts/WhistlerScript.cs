@@ -22,6 +22,7 @@ public class WhistlerScript : MonoBehaviour
     {
         EnemyAgent();
         SetWhistleVolume();
+        Debug.Log("Whistler position: " + transform.position);
     }
 
     private void EnemyAgent()
