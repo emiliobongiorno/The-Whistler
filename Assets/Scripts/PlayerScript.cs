@@ -12,7 +12,7 @@ public class PlayerScript : MonoBehaviour
     private float speed = 2.0f;
     private Rigidbody rb;
 */
-    public float range = 100f;
+    public float range = 5f;
     public Camera cam;
 
     public TextMeshProUGUI grabHintText;
@@ -38,7 +38,7 @@ public class PlayerScript : MonoBehaviour
        RaycastHit hit;        
        Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
        if (Physics.Raycast(ray , out hit, range)) {
-            if (hit.transform.tag == "Hint") {
+            if (hit.collider.CompareTag("Hint")) {
                 if (Input.GetKeyDown(KeyCode.E)) 
                 {
                     PickUpHint(hit);
