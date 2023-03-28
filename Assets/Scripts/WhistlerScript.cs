@@ -21,8 +21,9 @@ public class WhistlerScript : MonoBehaviour
     void Update()
     {
         EnemyAgent();
-        SetWhistleVolume();
-        Debug.Log("Whistler position: " + transform.position);
+        float distance =  Vector3.Distance(player.transform.position, transform.position);
+        SetWhistleVolume(distance);
+        SetWhistleSpeed(distance);
     }
 
     private void EnemyAgent()
@@ -30,9 +31,32 @@ public class WhistlerScript : MonoBehaviour
         agent.SetDestination(player.transform.position);
     }
 
-    private void SetWhistleVolume()
+    private void SetWhistleVolume(float distance)
     {
-        float distance =  Vector3.Distance(player.transform.position, transform.position);
+        
         whistle.volume = distance / 100.0f;
+      //  Debug.Log("Whistler volume: " + distance / 100.0f);
+
+    }
+
+    private void SetWhistleSpeed(float distance)
+    {
+        if (distance > 100) 
+        {
+            agent.speed = 6;
+        }
+        else if (distance > 6) 
+        {
+            agent.speed = 4;
+        }
+        else {
+            agent.speed = 50;
+            //Lose animation
+        }
+        
+        //Debug.Log("Whistler distance: " + distance);
+        Debug.Log("Whistler speed: " + agent.speed);
+        //Debug.Log("Whistler volume: " + distance / 100.0f);
+
     }
 }
