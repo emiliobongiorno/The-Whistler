@@ -26,20 +26,15 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         /* Random hints positions */
-        
+        /*
         int x = 0;
         int z = 0;
         for (int i = 0; i < hintsToFind; i++) {
-            //Vector3 hintPosition = Random(new Vector3(490,0,490), new Vector3(510,0,510));
             Vector3 hintPosition = Random(new Vector3(x,0,z), new Vector3(x+50,0,z+50));
             x+=50;
             z+=50;
             CreateHint(hintPosition);
-        }
-        
-       // Vector3 hintPosition = Random(new Vector3(0,0,50), new Vector3(0,0,50));
-        //CreateHint(hintPosition);
-        
+        }*/
     }
 
     private void CreateHint(Vector3 position) 
