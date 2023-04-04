@@ -11,6 +11,8 @@ public class WhistlerScript : MonoBehaviour
 
     public NavMeshAgent agent;
 
+    public Transform playerOrientation;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +26,11 @@ public class WhistlerScript : MonoBehaviour
         float distance =  Vector3.Distance(player.transform.position, transform.position);
         SetWhistleVolume(distance);
         SetWhistleSpeed(distance);
+        if (distance < 9) {
+            playerOrientation.LookAt(transform);
+            //Loose animation
+            Debug.Log("PERDISTE");
+        }
     }
 
     private void EnemyAgent()
@@ -34,7 +41,7 @@ public class WhistlerScript : MonoBehaviour
     private void SetWhistleVolume(float distance)
     {
         
-        whistle.volume = distance / 100.0f;
+        whistle.volume = 0.0f;//distance / 100.0f;
       //  Debug.Log("Whistler volume: " + distance / 100.0f);
 
     }
@@ -43,15 +50,11 @@ public class WhistlerScript : MonoBehaviour
     {
         if (distance > 100) 
         {
-            agent.speed = 6;
-        }
-        else if (distance > 6) 
-        {
             agent.speed = 4;
         }
-        else {
-            agent.speed = 50;
-            //Lose animation
+        else
+        {
+            agent.speed = 2;
         }
         
         //Debug.Log("Whistler distance: " + distance);

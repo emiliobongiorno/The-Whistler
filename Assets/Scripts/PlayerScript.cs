@@ -42,6 +42,7 @@ public class PlayerScript : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.E)) 
                 {
                     PickUpHint(hit);
+                    hit.collider.tag = "PickedHint";
                 }
                 grabHintText.enabled = true; 
             }
@@ -58,6 +59,12 @@ public class PlayerScript : MonoBehaviour
         script.TurnOffLight();
         script.DestroyPaper();
         Debug.Log("Hint picked up");
+
+/*
+        pauseMenu.SetActive(true);
+        hudElements.SetActive(false);
+        isPaused = true;
+        Time.timeScale = 0;*/
     }
 
 

@@ -8,6 +8,8 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement")]
     public float moveSpeed;
 
+    public float sprintSpeed;
+
     public float groundDrag;
     [Header("Ground Check")]
     public float playerHeight;
@@ -33,8 +35,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        UpdateSpeed();
-
         // ground check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
         
@@ -51,7 +51,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        UpdateSpeed();
         MovePlayer();
     }
 
@@ -66,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
     {
         // calculate movement direction
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
-        rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+        rb.AddForce(moveDirection.normalized * (moveSpeed + GetSprint()) * 10f, ForceMode.Force);
 
     }
 
@@ -75,22 +74,21 @@ public class PlayerMovement : MonoBehaviour
         Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
         // limit velocity if needed
-        if (flatVel.magnitude > moveSpeed)
+        float speed = moveSpeed + GetSprint();
+        if (flatVel.magnitude > speed)
         {
-            Vector3 limitedVel = flatVel.normalized * moveSpeed;
+            Vector3 limitedVel = flatVel.normalized * speed;
             rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
         }
     }
 
-    private void UpdateSpeed() 
+    private float GetSprint() 
     {
-        if(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+        float sprint = sprintSpeed;
+        if(!(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
         {
-            moveSpeed = 7;
+            sprint = 0;
         }
-        else 
-        {
-            moveSpeed = 4;
-        }
+        return sprint;
     }
 }
