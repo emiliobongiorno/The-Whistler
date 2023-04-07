@@ -117,11 +117,6 @@ public class PlayerScript : MonoBehaviour
            // Debug.Log("End game: You loose");
             break;
         case "Exit":
-            Debug.Log("End game: You win");
-            Time.timeScale = 0;
-            winScreen.SetActive(true);
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
             if (AreHintsPickedUp())
             {
                 Debug.Log("End game: You win");

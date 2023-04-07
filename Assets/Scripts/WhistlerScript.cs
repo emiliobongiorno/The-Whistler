@@ -7,7 +7,8 @@ public class WhistlerScript : MonoBehaviour
 {
     public GameObject player;
     public float speed;
-    public AudioSource whistle;
+    public AudioSource whistleSounds;
+    public AudioSource looseSound;
 
     public NavMeshAgent agent;
 
@@ -16,10 +17,12 @@ public class WhistlerScript : MonoBehaviour
     public GameObject looseScreen;
     public GameObject whistlerImage;
 
+    private bool lost = false;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -29,10 +32,12 @@ public class WhistlerScript : MonoBehaviour
         float distance =  Vector3.Distance(player.transform.position, transform.position);
         SetWhistleVolume(distance);
         SetWhistleSpeed(distance);
-        if (distance < 9) {
+        if (distance < 9 && lost == false) {
+            lost = true;
             //Loose animation
             PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
             playerMovement.enabled = false;
+            looseSound.Play();
             StartCoroutine(LooseAnimation()); 
         }
     }
@@ -52,6 +57,7 @@ public class WhistlerScript : MonoBehaviour
         Debug.Log("PERDISTE");
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        whistleSounds.Stop();
     }
 
     private void EnemyAgent()
@@ -62,7 +68,7 @@ public class WhistlerScript : MonoBehaviour
     private void SetWhistleVolume(float distance)
     {
         
-        whistle.volume = 0.0f;//distance / 100.0f;
+        whistleSounds.volume = distance / 100.0f;
       //  Debug.Log("Whistler volume: " + distance / 100.0f);
 
     }
