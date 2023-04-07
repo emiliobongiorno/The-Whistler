@@ -17,10 +17,16 @@ public class PlayerScript : MonoBehaviour
 
     public TextMeshProUGUI grabHintText;
 
+    public int hintsToFind = 6;
+    public TextMeshProUGUI hintText;
+    public float showHintTime = 0f;
 
+    public GameObject winScreen;
 
     void Start()
     {
+        hintText.enabled = false;
+        Time.timeScale = 0;
         //rb = GetComponent<Rigidbody>();
         grabHintText.enabled = false; 
     }
@@ -30,6 +36,12 @@ public class PlayerScript : MonoBehaviour
     {
       // Move();
        PerformRaycast();
+
+       showHintTime -= Time.deltaTime;
+        if (showHintTime <= 0.0f)
+        {
+            hintText.enabled = false;
+        }
 
     }
 
@@ -54,53 +66,45 @@ public class PlayerScript : MonoBehaviour
 
     void PickUpHint(RaycastHit hit)
     {
-        GameManager.instance.FindHint();
+        ShowHintText();
         HintScript script = hit.transform.gameObject.GetComponent<HintScript>();
         script.TurnOffLight();
         script.DestroyPaper();
         Debug.Log("Hint picked up");
-
-/*
-        pauseMenu.SetActive(true);
-        hudElements.SetActive(false);
-        isPaused = true;
-        Time.timeScale = 0;*/
     }
 
-
-/*
-    void Move()
+    public void ShowHintText()
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
-        Vector3 moveInput = new Vector3(horizontal,0,vertical);
-
-        if (moveInput == Vector3.zero)
+        switch(hintsToFind)
         {
-            anim.SetBool("isWalking", false);
-            anim.SetBool("isRunning", false);
+            case 6:
+                hintText.text = "Muevete rápido y no te pierdas del camino";
+                break;
+            case 5:
+                hintText.text = "Ten en cuenta las bifuraciones del camino para no perderte al volver";
+                break;
+            case 4:
+                hintText.text = "Debes recoger todas las notas para poder escapar";
+                break;
+            case 3:
+                hintText.text = "Solo quedan dos notas por encontrar";
+                break;
+            case 2:
+                hintText.text = "Para salir a tiempo debes hacerlo en coche. Queda una última nota con la llave del mismo";
+                break;
+            case 1:
+                hintText.text = "Encuentra el carro y sal de aquí!";
+                break;
+            default:
+                // code block
+                break;
         }
-        else
-        {
-            if(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
-            {
-                speed = runSpeed;
-                anim.SetBool("isRunning", true);
-                anim.SetBool("isWalking", false);
-            }
-            else 
-            {
-                speed = walkSpeed;
-                anim.SetBool("isWalking", true);
-                anim.SetBool("isRunning", false);
-            }
-            //transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * mouseSensibility, 0);
-            //transform.rotation = Quaternion.LookRotation(moveInput);
-        }
+        hintText.enabled = true;
+        showHintTime = 8.0f;
+        hintsToFind -= 1;
+        Debug.Log("Hints to find: " + hintsToFind);
+    }
 
-//        transform.Translate(moveInput * speed * Time.deltaTime);
-        //rb.MovePosition(transform.position + moveInput * speed * Time.fixedDeltaTime);
-    }*/
 
     void OnCollisionEnter(Collision col) 
     {
@@ -110,16 +114,30 @@ public class PlayerScript : MonoBehaviour
         case "Hint":
             break;
         case "Whistler":
-            Debug.Log("End game: You loose");
+           // Debug.Log("End game: You loose");
             break;
         case "Exit":
-            if (GameManager.instance.AreHintsPickedUp())
+            Debug.Log("End game: You win");
+            Time.timeScale = 0;
+            winScreen.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            if (AreHintsPickedUp())
             {
                 Debug.Log("End game: You win");
+                Time.timeScale = 0;
+                winScreen.SetActive(true);
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
             }
             break;
         }
 
+    }
+
+    public bool AreHintsPickedUp()
+    {
+        return hintsToFind == 0;
     }
 
     

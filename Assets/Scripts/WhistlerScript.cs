@@ -13,6 +13,9 @@ public class WhistlerScript : MonoBehaviour
 
     public Transform playerOrientation;
 
+    public GameObject looseScreen;
+    public GameObject whistlerImage;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,10 +30,28 @@ public class WhistlerScript : MonoBehaviour
         SetWhistleVolume(distance);
         SetWhistleSpeed(distance);
         if (distance < 9) {
-            playerOrientation.LookAt(transform);
             //Loose animation
-            Debug.Log("PERDISTE");
+            PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
+            playerMovement.enabled = false;
+            StartCoroutine(LooseAnimation()); 
         }
+    }
+
+    IEnumerator LooseAnimation()
+    {
+        bool showImage = false;
+        for(int i = 0; i < 40; i++)
+        {
+            showImage = !showImage;
+            yield return new WaitForSeconds(0.03f);
+            whistlerImage.SetActive(showImage);
+        } 
+        whistlerImage.SetActive(true);
+        Time.timeScale = 0;
+        looseScreen.SetActive(true);
+        Debug.Log("PERDISTE");
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     private void EnemyAgent()
