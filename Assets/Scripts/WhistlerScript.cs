@@ -69,7 +69,7 @@ public class WhistlerScript : MonoBehaviour
     {
         
         whistleSounds.volume = distance / 100.0f;
-      //  Debug.Log("Whistler volume: " + distance / 100.0f);
+        Debug.Log("Whistler volume: " + distance / 100.0f);
 
     }
 
@@ -77,7 +77,7 @@ public class WhistlerScript : MonoBehaviour
     {
         if (distance > 100) 
         {
-            agent.speed = 4;
+            agent.speed = 5;
         }
         else
         {

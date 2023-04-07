@@ -6,12 +6,8 @@ using TMPro;
 public class PlayerScript : MonoBehaviour
 {
 
-   /* public Animator anim;
-    public float walkSpeed = 2.0f;
-    public float runSpeed = 4.0f;
-    private float speed = 2.0f;
-    private Rigidbody rb;
-*/
+    public AudioSource carSound;
+
     public float range = 5f;
     public Camera cam;
 
@@ -22,6 +18,8 @@ public class PlayerScript : MonoBehaviour
     public float showHintTime = 0f;
 
     public GameObject winScreen;
+
+    public GameObject whistler;
 
     void Start()
     {
@@ -78,22 +76,22 @@ public class PlayerScript : MonoBehaviour
         switch(hintsToFind)
         {
             case 6:
-                hintText.text = "Muevete rápido y no te pierdas del camino";
+                hintText.text = "Muevete rapido y no te pierdas del camino";
                 break;
             case 5:
-                hintText.text = "Ten en cuenta las bifuraciones del camino para no perderte al volver";
+                hintText.text = "Debes recoger todas las notas para poder escapar";
                 break;
             case 4:
-                hintText.text = "Debes recoger todas las notas para poder escapar";
+                hintText.text = "Ten en cuenta las bifuraciones del camino para no perderte al volver";
                 break;
             case 3:
                 hintText.text = "Solo quedan dos notas por encontrar";
                 break;
             case 2:
-                hintText.text = "Para salir a tiempo debes hacerlo en coche. Queda una última nota con la llave del mismo";
+                hintText.text = "Para salir a tiempo debes hacerlo en coche. Queda una ultima nota con la llave del mismo";
                 break;
             case 1:
-                hintText.text = "Encuentra el carro y sal de aquí!";
+                hintText.text = "Encuentra el carro y sal de aqui!";
                 break;
             default:
                 // code block
@@ -119,20 +117,28 @@ public class PlayerScript : MonoBehaviour
         case "Exit":
             if (AreHintsPickedUp())
             {
-                Debug.Log("End game: You win");
-                Time.timeScale = 0;
-                winScreen.SetActive(true);
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
+                WinGame();
             }
             break;
         }
 
     }
 
+    public void WinGame()
+    {
+        Debug.Log("End game: You win");
+        Time.timeScale = 0;
+        winScreen.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        whistler.GetComponent<AudioSource>().Stop();
+        carSound.Play();
+
+    }
+
     public bool AreHintsPickedUp()
     {
-        return hintsToFind == 0;
+        return hintsToFind <= 0;
     }
 
     

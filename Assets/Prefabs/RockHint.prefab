@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8616248375037141563}
   m_LocalRotation: {x: 0.7071068, y: 1.7763566e-15, z: -3.5527133e-15, w: 0.70710677}
-  m_LocalPosition: {x: 0, y: 42.4, z: 0}
+  m_LocalPosition: {x: 0, y: 54.9, z: 0}
   m_LocalScale: {x: 20, y: 20, z: 20}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -44,7 +44,7 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
+  m_Intensity: 1.4
   m_Range: 10
   m_SpotAngle: 38.4
   m_InnerSpotAngle: 21.80208
@@ -294,7 +294,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: bbc52e9f4f0e54547bf3ce9e2dde9c53, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Hint
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbc52e9f4f0e54547bf3ce9e2dde9c53, type: 3}

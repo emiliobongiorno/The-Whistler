@@ -1297,9 +1297,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a245c747703f40e09b4761453753b2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  carSound: {fileID: 0}
   range: 100
   cam: {fileID: 0}
   grabHintText: {fileID: 0}
+  hintsToFind: 6
+  hintText: {fileID: 0}
+  showHintTime: 0
+  winScreen: {fileID: 0}
+  whistler: {fileID: 0}
 --- !u!114 &5759392225488266722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1313,6 +1319,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 4
+  sprintSpeed: 0
   groundDrag: 5
   playerHeight: 2
   whatIsGround:
@@ -1552,7 +1559,7 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
+  m_Intensity: 1.2
   m_Range: 15
   m_SpotAngle: 77.8
   m_InnerSpotAngle: 21.80208
