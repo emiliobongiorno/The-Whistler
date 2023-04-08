@@ -21,6 +21,8 @@ public class PlayerScript : MonoBehaviour
 
     public GameObject whistler;
 
+    public GameObject looseScreen;
+
     void Start()
     {
         hintText.enabled = false;
@@ -120,8 +122,13 @@ public class PlayerScript : MonoBehaviour
                 WinGame();
             }
             break;
+        case "LooseArea":
+            Time.timeScale = 0;
+            looseScreen.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            break;
         }
-
     }
 
     public void WinGame()

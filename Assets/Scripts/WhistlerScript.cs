@@ -54,7 +54,6 @@ public class WhistlerScript : MonoBehaviour
         whistlerImage.SetActive(true);
         Time.timeScale = 0;
         looseScreen.SetActive(true);
-        Debug.Log("PERDISTE");
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         whistleSounds.Stop();
@@ -69,7 +68,7 @@ public class WhistlerScript : MonoBehaviour
     {
         
         whistleSounds.volume = distance / 100.0f;
-        Debug.Log("Whistler volume: " + distance / 100.0f);
+      //  Debug.Log("Whistler volume: " + distance / 100.0f);
 
     }
 

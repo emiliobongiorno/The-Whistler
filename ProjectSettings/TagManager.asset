@@ -9,6 +9,7 @@ TagManager:
   - Exit
   - RockHint
   - PickedHint
+  - LooseArea
   layers:
   - Default
   - TransparentFX
